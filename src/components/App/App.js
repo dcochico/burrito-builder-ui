@@ -6,7 +6,10 @@ import OrderForm from "../../components/OrderForm/OrderForm";
 
 const App = () => {
   const [orders, setOrders] = useState([]);
+  const [newOrder, setNewOrder] = useState('');
   const [error, setError] = useState('');
+
+  console.log('newOrder', newOrder);
 
   useEffect(() => {
     getOrders()
@@ -23,11 +26,13 @@ const App = () => {
       .catch(err => setError(err));
   }, []);
 
+  const addOrder = order => setNewOrder(order)
+
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm />
+        <OrderForm addOrder={addOrder} />
       </header>
 
       <Orders orders={orders} />
