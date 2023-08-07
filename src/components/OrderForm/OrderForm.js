@@ -69,7 +69,7 @@ const OrderForm = ({ addOrder, styles }) => {
         required
       />
 
-      {ingredientButtons}
+      <div className="ingredient-buttons">{ingredientButtons}</div>
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
       {formError && <h2 style={styles} >{formError}</h2>}
