@@ -4,6 +4,10 @@ const OrderForm = (props) => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
+  console.log(name)
+
+  const handleName = e => setName(e.target.value);
+
   const handleSubmit = e => {
     e.preventDefault();
     clearInputs();
@@ -47,7 +51,7 @@ const OrderForm = (props) => {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
+        onChange={e => handleName(e)}
       />
 
       {ingredientButtons}
