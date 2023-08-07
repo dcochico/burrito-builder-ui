@@ -14,8 +14,12 @@ describe("Home Page", () => {
         .get('.order').should('have.length', 3)
         .get('.order').first().contains('h3', 'Pat')
         .get('.order').first().find('ul').children().should('have.length', 5)
+        .get('.order').first().find('ul').children().first().should('have.text', 'beans')
+        .get('.order').first().find('ul').children().last().should('have.text', 'jalapeno')
         .get('.order').last().contains('h3', 'Alex')
-        .get('.order').first().find('ul').children().should('have.length', 5)
+        .get('.order').last().find('ul').children().should('have.length', 5)
+        .get('.order').last().find('ul').children().first().should('have.text', 'sofritas')
+        .get('.order').last().find('ul').children().last().should('have.text', 'queso fresco')
     })
   });
 
@@ -32,6 +36,8 @@ describe("Home Page", () => {
         .get('.order').should('have.length', 4)
         .get('.order').last().contains('h3', 'Dan')
         .get('.order').last().find('ul').children().should('have.length', 3)
+        .get('.order').last().find('ul').children().first().should('have.text', 'beans')
+        .get('.order').last().find('ul').children().last().should('have.text', 'carnitas')
     })
   })
 
