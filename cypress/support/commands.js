@@ -9,10 +9,6 @@ Cypress.Commands.add('getData', () => {
   cy.stubRequest('GET', 200, 'orders')
 });
 
-Cypress.Commands.add('dropData', () => {
-  cy.stubRequest('GET', 500, 'orders')
-});
-
 Cypress.Commands.add('postData', () => {
   cy.stubRequest('POST', 201, 'newOrder')
 });
