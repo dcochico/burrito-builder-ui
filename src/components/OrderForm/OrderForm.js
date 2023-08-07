@@ -3,8 +3,11 @@ import { useState } from "react";
 const OrderForm = (props) => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
+  const [error, setError] = useState('')
 
   console.log(name, ingredients)
+
+  const styles = { color: 'red' };
 
   const handleName = e => setName(e.target.value);
 
@@ -15,6 +18,15 @@ const OrderForm = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (name && ingredients.length) {
+      console.log('Success.')
+    } else if (!name && !ingredients.length) {
+      setError('Please add name and ingredients');
+    } else if (!name) {
+      setError('Please add name.')
+    } else if (!ingredients.length) {
+      setError('Please add ingredients.')
+    }
     clearInputs();
   }
 
@@ -63,7 +75,7 @@ const OrderForm = (props) => {
       {ingredientButtons}
 
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
-
+      {error && <h2 style={styles} >{error}</h2>}
       <button onClick={(e) => handleSubmit(e)}>Submit Order</button>
     </form>
   );
