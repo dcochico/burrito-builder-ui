@@ -6,10 +6,22 @@ import OrderForm from "../../components/OrderForm/OrderForm";
 
 const App = () => {
   const [orders, setOrders] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    getOrders().catch((err) => console.error("Error fetching:", err));
-  });
+    getOrders()
+      .then(res => {
+        if (!res.ok) {
+          throw Error('There has been an error.')
+        }
+        return res.json()
+      })
+      .then(data => {
+        setOrders(data.orders)
+        setError('')
+      })
+      .catch(err => setError(err));
+  }, []);
 
   return (
     <main className="App">
