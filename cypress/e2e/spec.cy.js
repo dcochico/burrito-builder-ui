@@ -3,7 +3,7 @@ describe("Home Page", () => {
     cy.visit('http://localhost:3000')
   })
 
-  it.only("Should display title, form, and orders on page load", () => {
+  it("Should display title, form, and orders on page load", () => {
     cy.getData().as('getData')
     cy.wait('@getData').then(() => {
       cy.get('header').contains('h1', 'Burrito Builder')
@@ -19,6 +19,21 @@ describe("Home Page", () => {
     })
   });
 
-  it('Should allow user to add new order', () => {})
+  it.only('Should allow user to add new order', () => {
+    cy.getData().as('getData')
+    cy.postData().as('postData')
+    cy.wait('@getData').then(() => {
+      cy.get('input[type="text"]').type('Dan')
+        .get('.ingredient-buttons').children().first().click()
+        .get('.ingredient-buttons').children().eq(1).click()
+        .get('.ingredient-buttons').children().last().click()
+        .get('button').last().click()
+        .wait('@postData')
+        .get('.order').should('have.length', 4)
+        .get('.order').last().contains('h3', 'Dan')
+        .get('.order').last().find('ul').children().should('have.length', 3)
+    })
+  })
+  
   it('Should require name and at least one ingredient per order', () => {})
 });
