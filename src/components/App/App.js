@@ -47,18 +47,14 @@ const App = () => {
   const addOrder = order => setNewOrder(order)
 
   return (
-    <>
-    {!error ?
-      <main className="App">
-        <header>
-          <h1>Burrito Builder</h1>
-          <OrderForm addOrder={addOrder} styles={styles} />
-        </header>
+    <main className="App">
+      <header>
+        <h1>{error || 'Burrito Builder'}</h1>
+        <OrderForm addOrder={addOrder} styles={styles} />
+      </header>
 
-        <Orders orders={orders} />
-      </main> :
-      <h1 style={styles} >{error}</h1>}
-    </>
+      <Orders orders={orders} />
+    </main>
   );
 }
 
