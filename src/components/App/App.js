@@ -10,6 +10,7 @@ const App = () => {
   const [error, setError] = useState('');
 
   console.log('newOrder', newOrder);
+  console.log('orders', orders);
 
   useEffect(() => {
     getOrders()
@@ -25,6 +26,24 @@ const App = () => {
       })
       .catch(err => setError(err));
   }, []);
+
+  useEffect(() => {
+    if (newOrder) {
+      postOrder(newOrder)
+      .then(res => {
+        if (!res.ok) {
+          throw Error('There has been an error.')
+        }
+        return res.json()
+      })
+      .then(data => {
+        setOrders([...orders, data])
+        setNewOrder('')
+        setError('')
+      })
+      .catch(err => setError(err));
+    }
+  }, [newOrder]);
 
   const addOrder = order => setNewOrder(order)
 
