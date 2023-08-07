@@ -52,7 +52,6 @@ const App = () => {
         <h1>{error || 'Burrito Builder'}</h1>
         <OrderForm addOrder={addOrder} styles={styles} />
       </header>
-
       <Orders orders={orders} />
     </main>
   );
