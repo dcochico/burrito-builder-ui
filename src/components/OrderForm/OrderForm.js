@@ -4,9 +4,14 @@ const OrderForm = (props) => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
-  console.log(name)
+  console.log(name, ingredients)
 
   const handleName = e => setName(e.target.value);
+
+  const handleIngredients = e => {
+    e.preventDefault();
+    setIngredients(prevIngredients => [...prevIngredients, e.target.name]);
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,7 +42,7 @@ const OrderForm = (props) => {
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={e => handleIngredients(e)}
       >
         {ingredient}
       </button>
