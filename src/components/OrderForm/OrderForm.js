@@ -57,6 +57,7 @@ const OrderForm = (props) => {
         name="name"
         value={name}
         onChange={e => handleName(e)}
+        required
       />
 
       {ingredientButtons}
