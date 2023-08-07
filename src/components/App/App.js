@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { getOrders } from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
 
 const App = () => {
+  const [orders, setOrders] = useState([]);
+
   useEffect(() => {
     getOrders().catch((err) => console.error("Error fetching:", err));
   });
@@ -16,7 +18,7 @@ const App = () => {
         <OrderForm />
       </header>
 
-      <Orders orders={"Here is where orders go"} />
+      <Orders orders={orders} />
     </main>
   );
 }
