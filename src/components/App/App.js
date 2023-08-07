@@ -9,8 +9,7 @@ const App = () => {
   const [newOrder, setNewOrder] = useState('');
   const [error, setError] = useState('');
 
-  console.log('newOrder', newOrder);
-  console.log('orders', orders);
+  const styles = { color: 'red' };
 
   useEffect(() => {
     getOrders()
@@ -48,14 +47,18 @@ const App = () => {
   const addOrder = order => setNewOrder(order)
 
   return (
-    <main className="App">
-      <header>
-        <h1>Burrito Builder</h1>
-        <OrderForm addOrder={addOrder} />
-      </header>
+    <>
+    {!error ?
+      <main className="App">
+        <header>
+          <h1>Burrito Builder</h1>
+          <OrderForm addOrder={addOrder} styles={styles} />
+        </header>
 
-      <Orders orders={orders} />
-    </main>
+        <Orders orders={orders} />
+      </main> :
+      <h1 style={styles} >{error}</h1>}
+    </>
   );
 }
 

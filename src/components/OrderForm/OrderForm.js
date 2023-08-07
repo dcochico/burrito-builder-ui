@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-const OrderForm = ({ addOrder }) => {
+const OrderForm = ({ addOrder, styles }) => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [formError, setFormError] = useState('');
-
-  const styles = { color: 'red' };
 
   const handleName = e => setName(e.target.value);
 
