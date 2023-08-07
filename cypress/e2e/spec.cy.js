@@ -19,7 +19,7 @@ describe("Home Page", () => {
     })
   });
 
-  it.only('Should allow user to add new order', () => {
+  it('Should allow user to add new order', () => {
     cy.getData().as('getData')
     cy.postData().as('postData')
     cy.wait('@getData').then(() => {
@@ -34,6 +34,22 @@ describe("Home Page", () => {
         .get('.order').last().find('ul').children().should('have.length', 3)
     })
   })
-  
-  it('Should require name and at least one ingredient per order', () => {})
+
+  it('Should require name and at least one ingredient per order', () => {
+    cy.getData().as('getData')
+    cy.wait('@getData').then(() => {
+      cy.get('button').last().click()
+        .get('h2').should('have.text', 'Please add name and ingredients.')
+        .get('.order').should('have.length', 3)
+        .get('input[type="text"]').type('Dan')
+        .get('button').last().click()
+        .get('h2').should('have.text', 'Please add ingredients.')
+        .get('.order').should('have.length', 3)
+        .get('input[type="text"]').clear()
+        .get('.ingredient-buttons').children().first().click()
+        .get('button').last().click()
+        .get('h2').should('have.text', 'Please add name.')
+        .get('.order').should('have.length', 3)
+    })
+  })
 });
